@@ -10,7 +10,7 @@ interface ApiResponse<T> {
 // Creating a mapped type that modifies conferenceOrganizer to be a string
 type IModifiedConference = Omit<IConference, 'conferenceOrganizer'| 'conferenceStatus' > & {
   conferenceOrganizer: {_id:string,fullname:string};
-  conferenceStatus:"outline" | "accepted" | "submitted" | "rejected" | "review" | null | undefined
+  conferenceStatus: "accepted" | "submitted" | "rejected" | "review"
 };
 export const ConferenceApiSlice = createApi({
   reducerPath: 'conferenceapi',

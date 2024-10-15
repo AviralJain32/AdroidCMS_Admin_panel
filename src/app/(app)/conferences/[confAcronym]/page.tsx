@@ -65,13 +65,13 @@ const ConferencePage = () => {
     conferenceStatusComment,
     conferenceSubmissionsDeadlineDate,
   } = conferenceDetails;
-
+  const validStatus = conferenceStatus === "accepted" || conferenceStatus === "review" || conferenceStatus === "rejected" ? conferenceStatus : undefined;
   return (
     <div className="container mx-auto p-6 bg-white rounded-lg">
       <div className="shadow p-4">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-semibold">{conferenceTitle}</h1>
-          <CommentDialog ConfAcronym={params.confAcronym as string} confStatus={conferenceStatus as string} />
+          <CommentDialog ConfAcronym={params.confAcronym as string} confStatus={conferenceStatus} />
         </div>
         <Table className="min-w-full">
           <TableBody>

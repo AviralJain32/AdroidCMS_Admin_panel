@@ -42,6 +42,8 @@ function SignInForm() {
 
     console.log(result)
 
+
+
     if (result?.error) {
       if (result.error === 'CredentialsSignin') {
         toast({
@@ -56,6 +58,10 @@ function SignInForm() {
           variant: 'destructive',
         });
       }
+    }
+
+    if (result?.url) {
+      router.replace('/conferences');
     }
   };
 

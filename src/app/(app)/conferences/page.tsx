@@ -13,7 +13,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { Badge } from '@/components/ui/badge'
 
 
-const page = () => {
+const Page = () => {
 
   const router=useRouter()
   const pathname=usePathname()
@@ -125,4 +125,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

@@ -21,13 +21,13 @@ import { useParams } from 'next/navigation';
 // Define the validation schema
 const paperSubmissionSchema = z.object({
   comment: z.string().min(1, "Comment is required"),
-  Status: z.enum(["accepted", "review", "rejected"], { message: "Status is required" }),
+  Status: z.enum(["accepted", "review", "rejected","submitted"], { message: "Status is required" }),
 });
 
 type FormValues = z.infer<typeof paperSubmissionSchema>;
 
 // onfAcronym={params.confAcronym} confStatus={conferenceStatus}
-export function CommentDialog({ ConfAcronym, confStatus}: { ConfAcronym: string; confStatus: "accepted" | "review" | "rejected" | undefined}) {
+export function CommentDialog({ ConfAcronym, confStatus}: { ConfAcronym: string; confStatus: "accepted" | "review" | "rejected" |"submitted"| undefined }) {
 
   const form = useForm<z.infer<typeof paperSubmissionSchema>>({
     resolver: zodResolver(paperSubmissionSchema),

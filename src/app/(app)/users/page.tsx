@@ -68,7 +68,7 @@ export const columns: ColumnDef<IUser>[] = [
   },
 ]
 
-const page = () => {
+const Page = () => {
 
   
     const { data: AllUsers, error: UserError, isLoading: loadingUsers } = useGetAllUsersQuery()
@@ -88,4 +88,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
