@@ -9,7 +9,7 @@ import { ArrowUpDown } from 'lucide-react'
 import { Checkbox } from "@/components/ui/checkbox"
 import { IUser } from '@/model/User'
 
-export const columns: ColumnDef<IUser>[] = [
+const columns: ColumnDef<IUser>[] = [
   {
     id: "select",
     header: ({ table }) => (
