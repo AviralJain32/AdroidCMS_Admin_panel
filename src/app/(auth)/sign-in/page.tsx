@@ -14,7 +14,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
-import { useRouter, useSearchParams} from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { signInSchema } from '@/schemas/signInSchema';
 import { Suspense } from 'react';
 import { useToast } from '@/hooks/use-toast';
@@ -40,9 +40,7 @@ function SignInForm() {
       password: data.password,
     });
 
-    console.log(result)
-
-
+    console.log(result);
 
     if (result?.error) {
       if (result.error === 'CredentialsSignin') {
@@ -66,11 +64,13 @@ function SignInForm() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-100 to-blue-400">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-xl shadow-lg">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-black">
+      <div className="w-full max-w-md p-8 space-y-8 bg-gray-900 rounded-xl shadow-lg">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">Welcome Back!</h1>
-          <p className="text-sm text-gray-500">Sign in to access your account and manage your conferences</p>
+          <h1 className="text-4xl font-bold text-white mb-4">Admin Access</h1>
+          <p className="text-sm text-gray-400">
+            Sign in to manage conferences securely
+          </p>
         </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -79,11 +79,11 @@ function SignInForm() {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm text-gray-600">Email</FormLabel>
+                  <FormLabel className="text-sm text-gray-400">Email</FormLabel>
                   <Input
                     placeholder="Enter your email"
                     {...field}
-                    className="border-gray-300"
+                    className="border-gray-600 bg-gray-800 text-gray-300 placeholder-gray-500"
                   />
                   <FormMessage />
                 </FormItem>
@@ -94,26 +94,29 @@ function SignInForm() {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm text-gray-600">Password</FormLabel>
+                  <FormLabel className="text-sm text-gray-400">Password</FormLabel>
                   <Input
                     type="password"
                     placeholder="Enter your password"
                     {...field}
-                    className="border-gray-300"
+                    className="border-gray-600 bg-gray-800 text-gray-300 placeholder-gray-500"
                   />
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+            <Button
+              type="submit"
+              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white"
+            >
               Sign In
             </Button>
           </form>
         </Form>
         <div className="text-center mt-4">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-500">
             Don&apos;t have an account? &nbsp;
-            <Link href="/sign-up" className="text-blue-600 hover:text-blue-800 font-medium">
+            <Link href="/sign-up" className="text-indigo-500 hover:text-indigo-700 font-medium">
               Sign up now
             </Link>
           </p>
@@ -123,10 +126,10 @@ function SignInForm() {
   );
 }
 
-export default function newSuspenseBoundaryWrappedSignInForm(){
-
-  return <Suspense fallback={<div>Loading...</div>}>
-    <SignInForm/>
-  </Suspense>
+export default function newSuspenseBoundaryWrappedSignInForm() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SignInForm />
+    </Suspense>
+  );
 }
-

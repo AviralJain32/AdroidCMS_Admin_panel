@@ -117,12 +117,6 @@ function Navbar() {
               <Link href="/pricing" className="hover:font-bold" onClick={() => setOpen(false)}>
                 Pricing
               </Link>
-              <Link href="/about-us" className="hover:font-bold" onClick={() => setOpen(false)}>
-                About Us
-              </Link>
-              <Link href="/contact-us" className="hover:font-bold" onClick={() => setOpen(false)}>
-                Contact Us
-              </Link>
             </motion.div>
           </motion.div>
         )}
@@ -139,12 +133,6 @@ function Navbar() {
               </Link>
           <Link href="/users" className="hover:font-bold">
             Users
-          </Link>
-          <Link href="/about-us" className="hover:font-bold">
-            About Us
-          </Link>
-          <Link href="/contact-us" className="hover:font-bold">
-            Contact Us
           </Link>
         </div>
       </div>
