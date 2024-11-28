@@ -31,7 +31,7 @@ const ConferencePage = () => {
 
     const { data:conferenceDetails, error, isLoading } = useGetConferenceByConferenceIDQuery(params.confAcronym as string);
 
-    console.log(conferenceDetails)
+    console.log(conferenceDetails)  
 
   if (isLoading) {
     return <Loader/>

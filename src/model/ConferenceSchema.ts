@@ -1,4 +1,5 @@
 import mongoose, { Schema, Document } from 'mongoose';
+import UserModel from './User';
 // Interface for Conference document
 export interface IConference extends Document {
   conferenceOrganizer: mongoose.Types.ObjectId;
@@ -31,7 +32,7 @@ export interface IConference extends Document {
 
 // Conference schema definition
 const ConferenceSchema: Schema<IConference> = new Schema({
-  conferenceOrganizer: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  conferenceOrganizer: { type: Schema.Types.ObjectId, ref: UserModel, required: true },
   conferenceOrganizerWebPage: { type: String},
   conferenceOrganizerPhoneNumber: { type: Number, required: true },
   conferenceOrganizerRole: { type: String, required: true },

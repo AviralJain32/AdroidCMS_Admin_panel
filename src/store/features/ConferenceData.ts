@@ -26,7 +26,6 @@ export const ConferenceApiSlice = createApi({
           throw new Error(response.message);
         }
       },
-      providesTags: ['conference'],
     }),
     getConferenceByConferenceID: builder.query<IModifiedConference, string>({
       query: (confName) => `/get-conference-by-conference-id?confName=${confName}`,

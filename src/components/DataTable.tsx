@@ -68,7 +68,7 @@ export function DataTable<TData, TValue>({
         <Button>Delete Selected Users</Button>
       </div>
       <div className="rounded-md border">
-        <Table className="table-auto w-full text-lg"> {/* Updated class */}
+        <Table className="table-auto w-full md:text-md"> {/* Updated class */}
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -99,7 +99,7 @@ export function DataTable<TData, TValue>({
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       key={cell.id}
-                      className="p-4 text-base leading-relaxed"
+                      // className="p-2 text-base "
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>

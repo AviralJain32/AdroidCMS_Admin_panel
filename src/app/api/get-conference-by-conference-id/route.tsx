@@ -27,9 +27,9 @@ export async function GET(request: Request) {
 
         const getConferenceDetails=await ConferenceModel.findOne({
             conferenceAcronym:queryParams.confName
-        })
+        }).populate('conferenceOrganizer',"fullname")
 
-        // .populate('conferenceOrganizer',"fullname")
+        // 
 
         if(!getConferenceDetails){
             return new Response(
