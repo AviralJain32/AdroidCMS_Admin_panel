@@ -40,7 +40,6 @@ export const ConferenceApiSlice = createApi({
   }),
 });
 
-// Export hooks for usage in functional components
 export const { 
   useGetAllConferencesQuery, 
   useGetConferenceByConferenceIDQuery
