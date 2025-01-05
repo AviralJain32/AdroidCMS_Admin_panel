@@ -29,7 +29,9 @@ const ConferencePage = () => {
 
   const baseUrl = `${window.location.protocol}//${window.location.host}`;
 
-    const { data:conferenceDetails, error, isLoading } = useGetConferenceByConferenceIDQuery(params.confAcronym as string);
+    const { data:conferenceDetails, error, isLoading } = useGetConferenceByConferenceIDQuery(params.confAcronym as string, {
+      refetchOnMountOrArgChange: true, // Force refetch on mount
+});
 
     console.log(conferenceDetails)  
 

@@ -71,7 +71,9 @@ const columns: ColumnDef<IUser>[] = [
 const Page = () => {
 
   
-    const { data: AllUsers, error: UserError, isLoading: loadingUsers } = useGetAllUsersQuery()
+    const { data: AllUsers, error: UserError, isLoading: loadingUsers } = useGetAllUsersQuery(undefined,{
+      refetchOnMountOrArgChange: true, // Force refetch on mount
+})
 
     if(loadingUsers){
       return <Loader/>
