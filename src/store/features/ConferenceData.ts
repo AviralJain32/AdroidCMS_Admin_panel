@@ -17,16 +17,16 @@ export const ConferenceApiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
   tagTypes: ['conference'],
   endpoints: (builder) => ({
-    getAllConferences: builder.query<IConference[], void>({
-      query: () => `/get-all-conferences`,
-      transformResponse: (response: ApiResponse<IConference[]>) => {
-        if (response.success) {
-          return response.data;
-        } else {
-          throw new Error(response.message);
-        }
-      },
-    }),
+    // getAllConferences: builder.query<IConference[], void>({
+    //   query: () => `/get-all-conferences`,
+    //   transformResponse: (response: ApiResponse<IConference[]>) => {
+    //     if (response.success) {
+    //       return response.data;
+    //     } else {
+    //       throw new Error(response.message);
+    //     }
+    //   },
+    // }),
     getConferenceByConferenceID: builder.query<IModifiedConference, string>({
       query: (confName) => `/get-conference-by-conference-id?confName=${confName}`,
       transformResponse: (response: ApiResponse<IModifiedConference>) => {
@@ -41,6 +41,6 @@ export const ConferenceApiSlice = createApi({
 });
 
 export const { 
-  useGetAllConferencesQuery, 
+  // useGetAllConferencesQuery, 
   useGetConferenceByConferenceIDQuery
 } = ConferenceApiSlice;

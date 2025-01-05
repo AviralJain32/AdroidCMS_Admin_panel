@@ -1,16 +1,17 @@
 "use client"
 import Loader from '@/components/Loader'
 import { useGetAllUsersQuery } from '@/store/features/UserData'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ColumnDef } from "@tanstack/react-table"
 import { DataTable } from '../../../components/DataTable'
 import { Button } from '@/components/ui/button'
 import { ArrowUpDown } from 'lucide-react'
 import { Checkbox } from "@/components/ui/checkbox"
-import { useGetAllConferencesQuery } from '@/store/features/ConferenceData'
+// import { useGetAllConferencesQuery } from '@/store/features/ConferenceData'
 import { IConference } from '@/model/ConferenceSchema'
 import { usePathname, useRouter } from 'next/navigation'
 import { Badge } from '@/components/ui/badge'
+import axios from 'axios'
 
 
 const Page = () => {
@@ -108,19 +109,46 @@ const Page = () => {
   ]
 
   
-    const { data: AllConferences, error: ConferencesError, isLoading: loadingConferences } = useGetAllConferencesQuery(undefined,{
-      refetchOnMountOrArgChange:true,
-      refetchOnReconnect:true
-    })
+    // const { data: AllConferences, error: ConferencesError, isLoading: loadingConferences } = useGetAllConferencesQuery(undefined,{
+    //   refetchOnMountOrArgChange:true,
+    //   refetchOnReconnect:true
+    // })
+    const [conferences, setConferences] = useState<IConference[] | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+  
+    useEffect(() => {
+      const fetchConferences = async () => {
+        try {
+          // Making the API call using Axios
+          const response = await axios.get('/api/get-all-conferences');
+  
+          // Handling response
+          if (response.data.success) {
+            setConferences(response.data.data);
+          } else {
+            throw new Error(response.data.message);
+          }
+        } catch (err:any) {
+          // Handle any errors
+          setError(err.message || 'An error occurred');
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchConferences();
+      
+    }, []); // Empty array to run the effect only once when the component mounts
 
-    if(loadingConferences){
+    if(loading){
       return <Loader/>
     }
   return (
     <div className='container mx-auto flex-col  justify-between items-center'>
-      {!ConferencesError ? 
+      {!error ? 
         <div>
-      {AllConferences && <DataTable columns={columns} data={AllConferences} /> }
+      {conferences && <DataTable columns={columns} data={conferences} /> }
       </div>
       :  
       <div>An Error has been occured while fetching all the users</div>}

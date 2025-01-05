@@ -1,13 +1,14 @@
 "use client"
 import Loader from '@/components/Loader'
 import { useGetAllUsersQuery } from '@/store/features/UserData'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ColumnDef } from "@tanstack/react-table"
 import { DataTable } from '../../../components/DataTable'
 import { Button } from '@/components/ui/button'
 import { ArrowUpDown } from 'lucide-react'
 import { Checkbox } from "@/components/ui/checkbox"
 import { IUser } from '@/model/User'
+import axios from 'axios'
 
 const columns: ColumnDef<IUser>[] = [
   {
@@ -71,18 +72,46 @@ const columns: ColumnDef<IUser>[] = [
 const Page = () => {
 
   
-    const { data: AllUsers, error: UserError, isLoading: loadingUsers } = useGetAllUsersQuery(undefined,{
-      refetchOnMountOrArgChange: true, // Force refetch on mount
-})
+//     const { data: AllUsers, error: UserError, isLoading: loadingUsers } = useGetAllUsersQuery(undefined,{
+//       refetchOnMountOrArgChange: true, // Force refetch on mount
+// })
 
-    if(loadingUsers){
+const [users, setUsers] = useState<IUser[] | null>(null);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState<string | null>(null);
+
+useEffect(() => {
+  const fetchUsers = async () => {
+    try {
+      // Making the API call using Axios
+      const response = await axios.get('/api/get-all-users');
+
+      // Handling response
+      if (response.data.success) {
+        setUsers(response.data.data); // Save data to state
+      } else {
+        throw new Error(response.data.message); // Throw error if response is unsuccessful
+      }
+    } catch (err:any) {
+      setError(err.message || 'An error occurred'); // Handle errors
+    } finally {
+      setLoading(false); // Set loading to false after the request
+    }
+  };
+
+  fetchUsers(); // Call the fetch function when the component mounts
+
+}, []); // Empty array, so the effect runs only once when the component mounts
+
+
+    if(loading){
       return <Loader/>
     }
   return (
     <div className='container mx-auto flex-col  justify-between items-center'>
-      {!UserError ? 
+      {!error ? 
         <div>
-      {AllUsers && <DataTable columns={columns} data={AllUsers} /> }
+      {users && <DataTable columns={columns} data={users} /> }
       </div>
       :  
       <div>An Error has been occured while fetching all the users</div>}

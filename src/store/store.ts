@@ -1,16 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { UserApiSlice } from './features/UserData'
+// import { UserApiSlice } from './features/UserData'
 import { ConferenceApiSlice } from './features/ConferenceData'
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       // Add the generated reducer as a specific top-level slice
-    [UserApiSlice.reducerPath]: UserApiSlice.reducer,
+    // [UserApiSlice.reducerPath]: UserApiSlice.reducer,
     [ConferenceApiSlice.reducerPath]: ConferenceApiSlice.reducer
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(UserApiSlice.middleware,ConferenceApiSlice.middleware),
+      getDefaultMiddleware().concat(ConferenceApiSlice.middleware), //UserApiSlice.middleware,
   })
 }
 
