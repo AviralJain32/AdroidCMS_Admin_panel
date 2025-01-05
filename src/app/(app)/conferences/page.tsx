@@ -108,7 +108,10 @@ const Page = () => {
   ]
 
   
-    const { data: AllConferences, error: ConferencesError, isLoading: loadingConferences } = useGetAllConferencesQuery()
+    const { data: AllConferences, error: ConferencesError, isLoading: loadingConferences } = useGetAllConferencesQuery(undefined,{
+      refetchOnMountOrArgChange:true,
+      refetchOnReconnect:true
+    })
 
     if(loadingConferences){
       return <Loader/>
