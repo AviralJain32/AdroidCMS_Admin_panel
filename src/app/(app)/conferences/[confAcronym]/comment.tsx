@@ -58,7 +58,7 @@ export function CommentDialog({ ConfAcronym, confStatus}: { ConfAcronym: string;
         // Show success toast
         toast({
             title: 'Success!',
-            description: 'Comment added successfully.',
+            description: 'Comment added successfully and mail has been sent',
             variant: 'default',
         });
     } catch (error) {
