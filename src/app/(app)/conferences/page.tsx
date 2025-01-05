@@ -1,6 +1,6 @@
 "use client"
 import Loader from '@/components/Loader'
-import { useGetAllUsersQuery } from '@/store/features/UserData'
+// import { useGetAllUsersQuery } from '@/store/features/UserData'
 import React, { useEffect, useState } from 'react'
 import { ColumnDef } from "@tanstack/react-table"
 import { DataTable } from '../../../components/DataTable'
@@ -138,7 +138,7 @@ const Page = () => {
       };
   
       fetchConferences();
-      
+
     }, []); // Empty array to run the effect only once when the component mounts
 
     if(loading){

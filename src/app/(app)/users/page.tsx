@@ -1,6 +1,6 @@
 "use client"
 import Loader from '@/components/Loader'
-import { useGetAllUsersQuery } from '@/store/features/UserData'
+// import { useGetAllUsersQuery } from '@/store/features/UserData'
 import React, { useEffect, useState } from 'react'
 import { ColumnDef } from "@tanstack/react-table"
 import { DataTable } from '../../../components/DataTable'

@@ -17,6 +17,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useParams } from 'next/navigation';
+import  {toast}  from '@/hooks/use-toast.ts';
+import { useState } from 'react';
+import { Loader2 } from 'lucide-react';
 
 // Define the validation schema
 const paperSubmissionSchema = z.object({
@@ -29,6 +32,8 @@ type FormValues = z.infer<typeof paperSubmissionSchema>;
 // onfAcronym={params.confAcronym} confStatus={conferenceStatus}
 export function CommentDialog({ ConfAcronym, confStatus}: { ConfAcronym: string; confStatus: "accepted" | "review" | "rejected" |"submitted"| undefined }) {
 
+  const [loading, setLoading] = useState(false)
+
   const form = useForm<z.infer<typeof paperSubmissionSchema>>({
     resolver: zodResolver(paperSubmissionSchema),
     defaultValues: {
@@ -39,19 +44,38 @@ export function CommentDialog({ ConfAcronym, confStatus}: { ConfAcronym: string;
 
   const onSubmit = async (data: FormValues) => {
     console.log(data);
-    try {
-      const result = await axios.patch('/api/add-conference-comment', {
-        ...data,
-        conferenceAcronmym:ConfAcronym,
-      });
 
-      // Handle success (e.g., close dialog, show success message)
-      console.log('Success:', result.data);
+    try {
+      setLoading(true)
+        const result = await axios.patch('/api/add-conference-comment', {
+            ...data,
+            conferenceAcronmym: ConfAcronym,
+        });
+
+        // Handle success (e.g., close dialog, show success message)
+        console.log('Success:', result.data);
+        
+        // Show success toast
+        toast({
+            title: 'Success!',
+            description: 'Comment added successfully.',
+            variant: 'default',
+        });
     } catch (error) {
-      // Handle error (e.g., show error message)
-      console.error('Error:', error);
+        // Handle error (e.g., show error message)
+        console.error('Error:', error);
+        
+        // Show error toast
+        toast({
+            title: 'Error',
+            description: 'An error occurred while adding the comment. Please try again.',
+            variant: 'destructive',
+        });
     }
-  };
+    finally{
+      setLoading(false)
+    }
+};
 
   return (
     <Dialog>
@@ -123,7 +147,13 @@ export function CommentDialog({ ConfAcronym, confStatus}: { ConfAcronym: string;
               )}
             />
 
-              <Button type="submit" className="w-full ">Submit</Button>
+              <Button type="submit" className="w-full " disabled={loading}>
+                {loading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please Wait
+                </>
+              ) : ('Submit')}
+              </Button>
             {/* <DialogFooter className="mt-6">
             </DialogFooter> */}
           </form>
