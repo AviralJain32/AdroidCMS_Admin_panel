@@ -17,7 +17,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useParams } from 'next/navigation';
-import  {toast}  from '@/hooks/use-toast.ts';
+import  {toast}  from '@/hooks/use-toast';
 import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
 
