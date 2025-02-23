@@ -130,7 +130,7 @@ const Page = () => {
             throw new Error(response.data.message);
           }
         } catch (err:any) {
-          // Handle any errors
+          
           setError(err.message || 'An error occurred');
         } finally {
           setLoading(false);
