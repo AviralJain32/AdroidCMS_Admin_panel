@@ -6,6 +6,7 @@ import ConferenceModel from "@/model/ConferenceSchema";
 export async function GET(request: Request) {
     await dbConnect();
     
+    
     try {
 
         const getConferenceDetails=await ConferenceModel.find()

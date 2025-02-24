@@ -107,12 +107,6 @@ const Page = () => {
       )
     },
   ]
-
-  
-    // const { data: AllConferences, error: ConferencesError, isLoading: loadingConferences } = useGetAllConferencesQuery(undefined,{
-    //   refetchOnMountOrArgChange:true,
-    //   refetchOnReconnect:true
-    // })
     const [conferences, setConferences] = useState<IConference[] | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
