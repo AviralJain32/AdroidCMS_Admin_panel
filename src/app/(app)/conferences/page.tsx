@@ -116,7 +116,7 @@ const Page = () => {
         try {
           // Making the API call using Axios
           const response = await axios.get('/api/get-all-conferences');
-  
+          console.log("Response coming")
           // Handling response
           if (response.data.success) {
             setConferences(response.data.data);

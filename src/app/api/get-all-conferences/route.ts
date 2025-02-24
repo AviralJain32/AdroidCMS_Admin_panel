@@ -9,7 +9,7 @@ export async function GET(request: Request) {
     
     try {
 
-        const getConferenceDetails=await ConferenceModel.find()
+        const getConferenceDetails=await ConferenceModel.find().populate([{ path: "conferenceOrganizer", select: "fullname" }])
 
         if(!getConferenceDetails){
             return new Response(

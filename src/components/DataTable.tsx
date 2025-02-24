@@ -57,14 +57,14 @@ export function DataTable<TData, TValue>({
   return (
     <div>
       <div className="flex items-center justify-between py-4">
-        <Input
+        {/* <Input
           placeholder="Filter emails..."
           value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("email")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
-        />
+        /> */}
         <Button>Delete Selected Users</Button>
       </div>
       <div className="rounded-md border">
