@@ -107,33 +107,69 @@ const Page = () => {
       )
     },
   ]
+
+  
+    // const { data: AllConferences, error: ConferencesError, isLoading: loadingConferences } = useGetAllConferencesQuery(undefined,{
+    //   refetchOnMountOrArgChange:true,
+    //   refetchOnReconnect:true
+    // })
     const [conferences, setConferences] = useState<IConference[] | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
   
+    // useEffect(() => {
+    //   const fetchConferences = async () => {
+    //     try {
+    //       // Making the API call using Axios
+    //       const response = await axios.get('/api/get-all-conferences');
+  
+    //       // Handling response
+    //       if (response.data.success) {
+    //         setConferences(response.data.data);
+    //       } else {
+    //         throw new Error(response.data.message);
+    //       }
+    //     } catch (err:any) {
+          
+    //       setError(err.message || 'An error occurred');
+    //     } finally {
+    //       setLoading(false);
+    //     }
+    //   };
+  
+    //   fetchConferences();
+
+    // }, []); // Empty array to run the effect only once when the component mounts
+
+
     useEffect(() => {
       const fetchConferences = async () => {
         try {
-          // Making the API call using Axios
-          const response = await axios.get('/api/get-all-conferences');
-          console.log("Response coming")
-          // Handling response
-          if (response.data.success) {
-            setConferences(response.data.data);
-          } else {
-            throw new Error(response.data.message);
+          // Fetching data using fetch API
+          const response = await fetch('/api/get-all-conferences', {
+            next: {
+              revalidate: 10, // 1 hour
+            },
+          });
+    
+          if (!response.ok) {
+            throw new Error(`Error: ${response.status} ${response.statusText}`);
           }
-        } catch (err:any) {
-          
+    
+          const data = await response.json();
+          setConferences(data.data); // Update state with fetched conference
+        
+    
+        } catch (err: any) {
           setError(err.message || 'An error occurred');
         } finally {
           setLoading(false);
         }
       };
-  
+    
       fetchConferences();
-
-    }, []); // Empty array to run the effect only once when the component mounts
+    }, []); // Runs once on component mount
+    
 
     if(loading){
       return <Loader/>
