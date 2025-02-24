@@ -146,11 +146,7 @@ const Page = () => {
       const fetchConferences = async () => {
         try {
           // Fetching data using fetch API
-          const response = await fetch('/api/get-all-conferences', {
-            next: {
-              revalidate: 10, // 1 hour
-            },
-          });
+          const response = await fetch('/api/get-all-conferences', { cache: 'no-store' });
     
           if (!response.ok) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
