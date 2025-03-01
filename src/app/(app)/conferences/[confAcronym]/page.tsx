@@ -24,6 +24,7 @@ import { CommentDialog } from "./comment";
 
 const ConferencePage = () => {
   const params = useParams();
+  const ConfAcronym=decodeURIComponent(params.confAcronym as string)
   const [loading, setLoading] = useState(true);
   // const [conferenceDetails, setConferenceDetails] = useState<IConference | null>(null);
 
@@ -33,7 +34,6 @@ const ConferencePage = () => {
 refetchOnMountOrArgChange: true, // Force refetch on mount
 });
 
-    console.log(conferenceDetails)  
 
   if (isLoading) {
     return <Loader/>
@@ -73,7 +73,7 @@ refetchOnMountOrArgChange: true, // Force refetch on mount
       <div className="shadow p-4">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-semibold">{conferenceTitle}</h1>
-          <CommentDialog ConfAcronym={params.confAcronym as string} confStatus={conferenceStatus} />
+          <CommentDialog ConfAcronym={ConfAcronym} confStatus={conferenceStatus} />
         </div>
         <Table className="min-w-full">
           <TableBody>
