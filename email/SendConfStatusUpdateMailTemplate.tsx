@@ -48,7 +48,7 @@ export const SendConfStatusUpdateMailTemplate = ({
         </Text>
       </Container>
 
-      <Text style={footer}>Powered securely by Android CMS</Text>
+      <Text style={footer}>Powered securely by Adroid CMS</Text>
     </Body>
   </Html>
 );
