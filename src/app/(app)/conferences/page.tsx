@@ -177,7 +177,7 @@ const Page = () => {
       {conferences && <DataTable columns={columns} data={conferences} /> }
       </div>
       :  
-      <div>An Error has been occured while fetching all the users</div>}
+      <div>An Error has been occured while fetching all the conferences</div>}
     </div>
   )
 }

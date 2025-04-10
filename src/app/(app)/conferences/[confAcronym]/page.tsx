@@ -83,7 +83,7 @@ refetchOnMountOrArgChange: true, // Force refetch on mount
               <TableCell className="font-medium">
                 {conferenceCategory==="Book"?
                 <>{conferenceOrganizer.fullname}</>:
-                <a href={conferenceOrganizerWebPage} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+                <a href={conferenceOrganizerWebPage || ""} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
                   {conferenceOrganizer.fullname}
                 </a>
                 } ({conferenceOrganizerRole})<br />
@@ -96,13 +96,13 @@ refetchOnMountOrArgChange: true, // Force refetch on mount
             </TableRow>
             {conferenceCategory==="Book"?"":<TableRow>
               <TableHead>Conference Organizer webpage</TableHead>
-              <Link href={conferenceOrganizerWebPage} target="_blank">
+              <Link href={conferenceOrganizerWebPage || ""} target="_blank">
               <TableCell className="font-medium">{conferenceOrganizerWebPage}</TableCell>
               </Link>
             </TableRow>}
             {conferenceCategory==="Book"?"":<TableRow>
               <TableHead>Conference Website</TableHead>
-              <Link href={conferenceWebpage} target="_blank">
+              <Link href={conferenceWebpage || ""} target="_blank">
               <TableCell className="font-medium">{conferenceWebpage}</TableCell>
               </Link>
             </TableRow>}
