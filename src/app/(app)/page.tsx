@@ -55,7 +55,7 @@ const Page = () => {
 
       {/* Footer Section */}
       <div className="text-center mt-16">
-        <p className="text-gray-500">Powered by Android CMS</p>
+        <p className="text-gray-500">Powered by Adroid CMS</p>
       </div>
     </div>
   );

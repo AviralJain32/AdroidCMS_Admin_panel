@@ -50,6 +50,7 @@ const ConferencePage = () => {
   }
 
   const {
+    conferenceCategory,
     conferenceTitle,
     conferenceOrganizer,
     conferenceOrganizerWebPage,
@@ -84,11 +85,14 @@ const ConferencePage = () => {
         <Table className="min-w-full">
           <TableBody>
             <TableRow>
-              <TableHead>Organizer</TableHead>
+              <TableHead>{conferenceCategory==="Book"?"Corresponding Editor":"Organizer"}</TableHead>
               <TableCell className="font-medium">
-                <a href={conferenceOrganizerWebPage || ''} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+                {conferenceCategory==="Book"?
+                <>{conferenceOrganizer.fullname}</>:
+                <a href={conferenceOrganizerWebPage || ""} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
                   {conferenceOrganizer.fullname}
-                </a> ({conferenceOrganizerRole})<br />
+                </a>
+                } ({conferenceOrganizerRole})<br />
                 Phone: {conferenceOrganizerPhoneNumber}
               </TableCell>
             </TableRow>
@@ -96,48 +100,42 @@ const ConferencePage = () => {
               <TableHead>Email</TableHead>
               <TableCell className="font-medium">{conferenceEmail}</TableCell> 
             </TableRow>
-            <TableRow>
+            {conferenceCategory==="Book"?"":<TableRow>
               <TableHead>Conference Organizer webpage</TableHead>
-              <Link href={conferenceOrganizerWebPage || ''} target="_blank">
+              <Link href={conferenceOrganizerWebPage || ""} target="_blank">
               <TableCell className="font-medium">{conferenceOrganizerWebPage}</TableCell>
               </Link>
-            </TableRow>
-            <TableRow>
+            </TableRow>}
+            {conferenceCategory==="Book"?"":<TableRow>
               <TableHead>Conference Website</TableHead>
-              <Link href={conferenceWebpage} target="_blank">
+              <Link href={conferenceWebpage || ""} target="_blank">
               <TableCell className="font-medium">{conferenceWebpage}</TableCell>
               </Link>
-            </TableRow>
+            </TableRow>}
             <TableRow>
-              <TableHead>Submission Deadline</TableHead>
+              <TableHead>{conferenceCategory==="Book"?"Full Chapter Submission Date":"Submission Deadline"}</TableHead>
               <TableCell className="font-medium">
                 {moment(conferenceSubmissionsDeadlineDate).format("MMMM Do YYYY")}
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableHead>Conference Start Date</TableHead>
+              <TableHead>{conferenceCategory==="Book"?"Abstract Submission Date":"Conference Start Date"}</TableHead>
               <TableCell className="font-medium">
                 {moment(conferenceFirstDay).format("MMMM Do YYYY")}
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableHead>Conference End Date</TableHead>
+              <TableHead>{conferenceCategory==="Book"?"Final Notification Date":"Conference End Date"}</TableHead>
               <TableCell className="font-medium">
                 {moment(conferenceLastDay).format("MMMM Do YYYY")}
               </TableCell>
             </TableRow>
-            <TableRow>
+           {conferenceCategory==="Book"?"": <TableRow>
               <TableHead>Venue</TableHead>
               <TableCell className="font-medium">
                 {conferenceVenue}, {conferenceCity}, {conferenceCountry}
               </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableHead>Venue</TableHead>
-              <TableCell className="font-medium">
-                {conferenceVenue}, {conferenceCity}, {conferenceCountry}
-              </TableCell>
-            </TableRow>
+            </TableRow>}
             <TableRow>
               <TableHead>Estimated Number Of Submissions</TableHead>
               <TableCell className="font-medium">

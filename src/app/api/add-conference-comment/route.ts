@@ -6,6 +6,7 @@ import { sendConfStatusUpdateMail } from "@/helper/sendConfStatusUpdateMail";
 
 export async function PATCH(request: Request) {
     await dbConnect();
+    
 
     const session = await getServerSession(authOptions);
 
@@ -80,6 +81,7 @@ export async function PATCH(request: Request) {
             comment,
             Status,
             updatedConference?.conferenceEmail,
+
         )
 
         if(!emailResponse.success){

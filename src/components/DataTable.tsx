@@ -65,7 +65,7 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         /> */}
-        <Button>Delete Selected Users</Button>
+        {/* <Button>Delete Selected Users</Button> */}
       </div>
       <div className="rounded-md border">
         <Table className="table-auto w-full md:text-md"> {/* Updated class */}

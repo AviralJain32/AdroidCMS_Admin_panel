@@ -1,14 +1,18 @@
 import dbConnect from "@/lib/dbConnect";
+import UserModel from "@/model/User";
 import ConferenceModel from "@/model/ConferenceSchema";
+import mongoose from "mongoose";
 
 export const dynamic = "force-dynamic"
 
 export async function GET(request: Request) {
     await dbConnect();
-    
+    console.log("************************************************************");
+    console.log("ye hai models names  ",mongoose.modelNames());  // should include 'User' and 'Conference'
+    console.log("************************************************************");
     
     try {
-
+        const UserModels=UserModel
         const getConferenceDetails=await ConferenceModel.find().populate([{ path: "conferenceOrganizer", select: "fullname" }])
 
         if(!getConferenceDetails){
