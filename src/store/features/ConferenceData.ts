@@ -35,6 +35,7 @@
 
 
 import { IConference } from '@/model/ConferenceSchema';
+import { IPaper } from '@/model/PaperModel';
 import { IUser } from '@/model/User';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
@@ -73,10 +74,21 @@ export const ConferenceApiSlice = createApi({
         }
       },
     }),
+    getConferenceSubmittedPaperByConferenceID: builder.query<IPaper[], string>({
+      query: (confId) => `/conferences/get-conference-submitted-papers-by-conference-id?confId=${confId}`,
+      transformResponse: (response: ApiResponse<IPaper[]>) => {
+        if (response.success) {
+          return response.data;
+        } else {
+          throw new Error(response.message);
+        }
+      },
+    }),
   }),
 });
 
 export const { 
   // useGetAllConferencesQuery, 
-  useGetConferenceByConferenceIDQuery
+  useGetConferenceByConferenceIDQuery,
+  useGetConferenceSubmittedPaperByConferenceIDQuery
 } = ConferenceApiSlice;
